@@ -9,8 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ListView
+import androidx.recyclerview.widget.LinearLayoutManager
 import id.ac.unhas.infocovid19.R
 import id.ac.unhas.infocovid19.model.DataSource
+import kotlinx.android.synthetic.main.provinsilist_fragment.*
 
 class ProvinsiListFragment : Fragment() {
 
@@ -21,7 +23,7 @@ class ProvinsiListFragment : Fragment() {
     private lateinit var viewModel: ProvinsiViewModel
     private lateinit var viewModelFactory: ProvinsiViewModelFactory
 
-    private lateinit var listView: ListView
+    private lateinit var linearLayoutManager: LinearLayoutManager
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -37,7 +39,7 @@ class ProvinsiListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val jsonList:String =
             activity?.applicationContext?.let {
-                DataSource.getJsonDataFromAsset(it, "provinsi.json")
+                DataSource.getJsonDataFromAsset(it, "covid19-provinsi.json")
             }.toString()
 
         val provinsiRepository = ProvinsiRepository(jsonList)
@@ -48,18 +50,14 @@ class ProvinsiListFragment : Fragment() {
 
         viewModel.getProvinsisFromRepo()
 
-        Log.d("MainFragment","createView")
-        listView = view.findViewById(R.id.list_view_provinsi)
+        Log.d("MainFragment","${viewModel.provinsis.size}")
+        //listView = view.findViewById(R.id.list_view_provinsi)
 
-        val listItems = arrayOfNulls<String>(viewModel.provinsis.size)
+        linearLayoutManager = LinearLayoutManager(context)
+        recyclerview.layoutManager = linearLayoutManager
 
-        viewModel.provinsis.forEachIndexed { index, provinsi ->
-            listItems[index] = provinsi.toString()
-        }
-
-        val adapter = context?.let { ArrayAdapter(it,R.layout.listview_item_provinsi,listItems) }
-
-        listView.adapter = adapter
+        val adapter = ProvinsiAdapter(viewModel.provinsis)
+        recyclerview.adapter = adapter
     }
 
 }

@@ -10,10 +10,8 @@ class ProvinsiRepository(
     fun getProvinsisFromJsonString() : ArrayList<Provinsi>{
         val listProvinsi = ArrayList<Provinsi>()
         val dataProvinsi: DataProvinsi = DataSource.createDataSet(jsonString)
-        dataProvinsi.data?.forEach {
-            if (it != null) {
-                listProvinsi.add(it)
-            }
+        dataProvinsi.forEach {
+            listProvinsi.add(it)
         }
         return listProvinsi
     }
