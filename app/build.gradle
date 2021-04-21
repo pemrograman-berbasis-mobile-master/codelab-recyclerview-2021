@@ -6,6 +6,12 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+
+
     defaultConfig {
         applicationId "id.ac.unhas.infocovid19"
         minSdkVersion 21
@@ -14,6 +20,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField 'String', 'BASE_URL','"https://api.kawalcorona.com/"'
     }
 
     buildTypes {
@@ -39,4 +47,9 @@ dependencies {
 
     //gson json converter
     implementation 'com.google.code.gson:gson:2.8.5'
+
+    //retrofit library
+    implementation 'com.squareup.retrofit2:retrofit:2.7.1'
+    implementation 'com.squareup.retrofit2:converter-gson:2.7.1'
+
 }

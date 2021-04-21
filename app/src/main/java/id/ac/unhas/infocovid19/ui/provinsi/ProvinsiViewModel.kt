@@ -14,7 +14,7 @@ class ProvinsiViewModel(
         //_movies.clear()
         _provinsis.apply {
             if(isEmpty()){
-                addAll(repository.getProvinsisFromJsonString())
+               // addAll(repository.getProvinsisFromJsonString())
             }
         }
     }

@@ -7,6 +7,7 @@ import id.ac.unhas.infocovid19.model.Provinsi
 class ProvinsiRepository(
     private val jsonString: String
 ) {
+    /*
     fun getProvinsisFromJsonString() : ArrayList<Provinsi>{
         val listProvinsi = ArrayList<Provinsi>()
         val dataProvinsi: DataProvinsi = DataSource.createDataSet(jsonString)
@@ -17,4 +18,5 @@ class ProvinsiRepository(
         }
         return listProvinsi
     }
+    */
 }
